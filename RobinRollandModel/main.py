@@ -1,4 +1,6 @@
 import numpy as np
+from DataUtils import structure
+
 
 def nunique(arr):
     _,r = np.unique(arr,return_counts=True)
