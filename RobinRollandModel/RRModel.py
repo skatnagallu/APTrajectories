@@ -1,14 +1,14 @@
 import numpy as np
 
 def nunique(arr):
-    a,r = np.unique(arr,return_counts=True)
+    _,r = np.unique(arr,return_counts=True)
     return r[0]
 
 def unitnormals(nn_vectors,nn_shells):
     normal=np.sum(nn_vectors*((nn_shells==1)*1)[:,:,np.newaxis],axis=1)
     np.seterr(divide='ignore')
     normal= np.divide(normal,np.linalg.norm(normal,axis=1)[:,np.newaxis])
-    return normal    
+    return normal  
 
 def unitnormals_relaxed(nn_vectors, first_shell_idxs):
     """

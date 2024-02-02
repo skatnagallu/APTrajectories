@@ -14,8 +14,8 @@ def isInHull(P,hull):
     '''
     A = hull.equations[:,0:-1]
     b = np.transpose(np.array([hull.equations[:,-1]]))
-    isInHull = np.all((A @ np.transpose(P)) <= np.tile(-b,(1,len(P))),axis=0)
-    return isInHull
+    is_in_hull = np.all((A @ np.transpose(P)) <= np.tile(-b,(1,len(P))),axis=0)
+    return is_in_hull
 
 def create_tip(structure,h=80,a=20,ah=20, zheight=50):
     """
