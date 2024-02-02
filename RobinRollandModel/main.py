@@ -1,5 +1,5 @@
 import numpy as np
-from DataUtils import structure
+import datautils
 
 
 def nunique(arr):
