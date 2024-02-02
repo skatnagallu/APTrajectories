@@ -1,4 +1,6 @@
-Robin-Rolland type simulations for APT trajectories.
+$Robin-Rolland^{[1]}$ type simulations for APT trajectories.
+
+![conductor surface](conductor_surface.PNG)
 
 Consider a perfect conductor isolated in space brought to  electric potential $V_{a}$, as shown above.
 
@@ -49,3 +51,7 @@ where $q_{i,0}$ being an arbitary real positive number.
 the unit vector for $i^{th}$ atom depends on the theoretical P nearest neighbors:
 
 $$\vec{n_{i}} = -\frac{\sum_{j=1}^{P}\delta _{j} \vec{r_{ji}}}{|\sum_{j=1}^{P}\delta _{j} \vec{r_{ji}}|}$$
+
+**Reference**
+
+[1] Rolland, N., Vurpillot, F., Duguay, S., & Blavette, D. (2015). A Meshless Algorithm to Model Field Evaporation in Atom Probe Tomography. Microscopy and Microanalysis, 21(6). https://doi.org/10.1017/S1431927615015184
