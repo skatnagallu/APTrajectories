@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.spatial import ConvexHull
+import plotly.graph_objects as go
 
 class TipGenerator:
     def __init__(self, structure, h=80, a=20, ah=20, zheight=50):
@@ -93,17 +94,17 @@ class TipGenerator:
         lies_in_tip[:, 2] -= np.min(lies_in_tip[:, 2])
         return lies_in_tip
 
-def visual(ind):
-    charge = np.zeros(len(a[ind]))
-    #charge[d[ind]] = c[ind]
+def visualize(structure=None,charge=None):
+    if charge is None:
+        charge = structure.indices
     fig = go.Figure(data=[go.Scatter3d(
-            x=np.hstack([a[ind].positions[:,0],b[ind][:,0]]),
-            y=np.hstack([a[ind].positions[:,1],b[ind][:,1]]),
-            z=np.hstack([a[ind].positions[:,2],b[ind][:,2]]),
+            x=structure.positions[:,0],
+            y=structure.positions[:,1],
+            z=structure.positions[:,2],
             mode='markers',
             marker=dict(
                 size=9,
-                color=np.hstack([charge,b[ind][:,0]*0.0005]),                # set color to an array/list of desired values
+                color=charge,                # set color to an array/list of desired values
                 colorscale='Viridis',   # choose a colorscale
                  line=dict(
                         color='MediumPurple',
@@ -111,9 +112,6 @@ def visual(ind):
                 )
         )
     )])
-
     # tight layout
     fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
     fig.show()
-interactive_visual = interactive(visual,ind=widgets.IntSlider(min=0,max=5,step=1))
-interactive_visual
