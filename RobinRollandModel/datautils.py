@@ -188,3 +188,47 @@ def visualize(structure=None,charge=None,surf_indices=None):
     # tight layout
     fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
     fig.show()
+
+
+
+def visualize_evaporation(tip_pos, tip_pos_charge, tip_surf_ind_pos):
+    """
+    Visualizes the positions of atoms before and after evaporation using Plotly.
+
+    Parameters
+    ----------
+    tip_pos : dict
+        A dictionary containing the updated positions of the structure after each evaporation event.
+    tip_pos_charge : dict
+        A dictionary containing the final charge distributions post-evaporation.
+    tip_surf_ind_pos : dict
+        A dictionary containing the surface indices post-evaporation.
+    """
+    fig = go.Figure()
+
+    # Assuming the structure positions are stored in a numpy array format within the 'tip_pos' dictionary.
+    # Here, we visualize the initial structure before evaporation.
+    initial_positions = tip_pos[0].positions  # Adjust this according to how you store positions in `tip_pos`.
+    charge = tip_pos_charge[0]
+    ind = tip_surf_ind_pos[0]
+    fig.add_trace(go.Scatter3d(x=initial_positions[ind, 0], 
+                               y=initial_positions[ind, 1], 
+                               z=initial_positions[ind, 2],
+                               mode='markers', name='Initial Positions',
+                               marker=dict(size=2, color=charge)))
+
+    # Loop through each evaporation event to visualize the end positions
+    for i, pos in tip_pos.items():
+        final_positions = pos.positions  # Adjust this according to your data structure
+        fig.add_trace(go.Scatter3d(x=final_positions[:, 0], y=final_positions[:, 1], z=final_positions[:, 2],
+                                   mode='markers', name=f'Final Positions {i}',
+                                   marker=dict(size=2, color='red')))
+
+    # Customize layout
+    fig.update_layout(title='Evaporation Simulation Visualization',
+                      scene=dict(xaxis_title='X (Å)',
+                                 yaxis_title='Y (Å)',
+                                 zaxis_title='Z (Å)'),
+                      margin=dict(l=0, r=0, b=0, t=40))
+
+    fig.show()

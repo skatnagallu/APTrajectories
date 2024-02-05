@@ -113,6 +113,25 @@ def evaporation_trajectory(structure,surf_indices,new_charge,evap_ind=585,num_st
             evap_trajectory.append(next_pos)
     return np.array(evap_trajectory)
 
+
+def detecttor_image(evaporation_trajectory,det_z = 1e9):
+    vector = evaporation_trajectory[-2]-evaporation_trajectory[-1]
+    normal = [0,0,-1]
+    det_center = [25,25,det_z]
+    projection = project_vector_onto_plane(vector,normal,det_center)
+    return projection
+
+def project_vector_onto_plane(vector, normal, point_on_plane):
+    # Calculate the projection
+    vector = np.array(vector)
+    normal = np.array(normal)
+    point_on_plane = np.array(point_on_plane)
+    
+    projection = vector - np.dot(vector - point_on_plane, normal) * normal
+    
+    return projection
+
+
 def coulomb_force(positions,new_charge=None, surf_indices=None):
     """
     Takes the equilibrium charge (new_charge) on surface(surf_indices), for the structure positions.
@@ -129,4 +148,26 @@ def coulomb_force(positions,new_charge=None, surf_indices=None):
     c_f = np.zeros_like(positions)
     c_f[surf_indices] = np.stack(force)
     return c_f
+
+def run_evaporation(structure,e_field=4,num_atoms=500):
+    tip_output = charge_distribution_z(structure=structure,e_field=e_field,radius=20,steps=1000,epsilon=1e-9)
+    fin_evapos = {}
+    tip_pos={}
+    tip_pos_charge={}
+    tip_surf_ind_pos= {}
+    # for i in range(len(tip_output['final_charge'].nonzero()[0])):
+    for i in range(num_atoms):
+        evap_ind = np.argmax(tip_output['maxwell_stress'])
+        fin_evapos[i] = evaporation_trajectory(structure=structure,surf_indices=tip_output['surface_indices'],
+                                            new_charge = tip_output['final_charge'],
+                                            evap_ind=evap_ind,num_steps=200,dt=1.5)
+        del structure[tip_output['surface_indices'][evap_ind]]
+        new_structure = structure.copy()
+        tip_output = charge_distribution_z(structure=new_structure,e_field=e_field,radius=20,
+                                    steps=1000,epsilon=1e-9,zheight=50)
+        tip_pos[i] = new_structure
+        tip_pos_charge[i] = tip_output['final_charge']
+        tip_surf_ind_pos[i] = tip_output['surface_indices']
+
+    return tip_pos,tip_pos_charge,tip_surf_ind_pos
 
