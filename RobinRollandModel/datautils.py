@@ -3,27 +3,29 @@ from scipy.spatial import ConvexHull
 import plotly.graph_objects as go
 
 class TipGenerator:
-    def __init__(self, structure, h=80, a=20, ah=20, zheight=50):
+    def __init__(self, structure, h=80, ah=20, alpha=None, zheight=50):
         """
         Initializes the TipGenerator with the structure and dimensions for the tip.
 
         Parameters:
         - structure : pyiron.atomistics.structure.atoms.Atoms
             The pyiron structure object to be modified.
-        - h : float, optional
-            The height of the cylindrical base of the tip.
-        - a : float, optional
-            The radius of the tip base.
-        - ah : float, optional
+        - h : float
+            The height of the cylindrical base of the tip. if alpha is not none, then
+            h is the total height of the tip
+        - alpha : float, optional
+            Shank angle in degrees.
+        - ah : float
             The radius of the hemispherical end of the tip.
-        - zheight : float, optional
+        - zheight : float
             The height at which the tip starts. Currently not used in calculations.
         """
         self.structure = structure
         self.h = h
-        self.a = a
+        self.a = ah
         self.ah = ah
         self.zheight = zheight
+        self.alpha = alpha
 
     def isInHull(self, P, hull):
         """
@@ -43,20 +45,77 @@ class TipGenerator:
         b = np.transpose(np.array([hull.equations[:, -1]]))
         is_in_hull = np.all((A @ np.transpose(P)) <= np.tile(-b, (1, len(P))), axis=0)
         return is_in_hull
+    
+    @staticmethod
+    def create_shank_tip(radius_spherical_cap, shank_angle_degrees, total_height, num_points):
+        # Convert shank angle from degrees to radians
+        shank_angle = np.radians(shank_angle_degrees)
+        radius_top_base = radius_spherical_cap * np.cos(shank_angle)
+
+        # Determine the height of the spherical cap
+        h_spherical_cap = radius_spherical_cap - radius_spherical_cap * np.sin(shank_angle)
+
+        # Determine the height of the truncated cone
+        h_truncated_cone = total_height - h_spherical_cap
+
+        # Spherical cap coordinates
+        theta_cap = np.linspace(0, 2 * np.pi, num_points)
+        phi_cap = np.linspace(0, np.pi/2 - shank_angle, num_points)
+        Theta_cap, Phi_cap = np.meshgrid(theta_cap, phi_cap)
+        x_cap = radius_spherical_cap * np.sin(Phi_cap) * np.cos(Theta_cap)
+        y_cap = radius_spherical_cap * np.sin(Phi_cap) * np.sin(Theta_cap)
+        z_cap = radius_spherical_cap * np.cos(Phi_cap) 
+        x_cap = x_cap.ravel()
+        y_cap = y_cap.ravel()
+        z_cap = z_cap.ravel()
+
+        z_cap -= np.min(z_cap)
+        z_cap += h_truncated_cone
+        # Calculate the radius at the base (R1) based on Radius of spherical end and the shank angle
+        R1 = radius_top_base + h_truncated_cone * np.tan(shank_angle)
+
+        # Create arrays for u and v values
+        u_values = np.linspace(0, 1, num_points)
+        v_values = np.linspace(0, 2 * np.pi, num_points)
+
+        # Create meshgrid for u and v
+        u, v = np.meshgrid(u_values, v_values)
+
+        # Calculate x, y, and z coordinates using parametric equations
+        x = (R1 + (radius_top_base - R1) * u) * np.cos(v)
+        y = (R1 + (radius_top_base - R1) * u) * np.sin(v)
+        z = h_truncated_cone * u
+
+        x_cone = x.ravel()
+        y_cone = y.ravel()
+        z_cone = z.ravel()
+
+        # Adjust z_cone to start from bottom
+        z_cone_adjusted = z_cone
+
+        # Combine point clouds for cone and cap
+        x_cloud = np.concatenate((x_cone, x_cap))
+        y_cloud = np.concatenate((y_cone, y_cap))
+        z_cloud = np.concatenate((z_cone_adjusted, z_cap))
+        x_cloud-= np.min(x_cloud)
+        y_cloud-= np.min(y_cloud)
+
+        return x_cloud, y_cloud, z_cloud, R1
 
     def create_tip(self):
         """
         Creates and modifies the tip of the given pyiron structure object based on specified dimensions,
-        simulating a probe or AFM tip.
+        simulating a APT tip.
 
         Returns:
         - np.ndarray
             The positions of atoms within the structure that lie within the convex hull of the tip,
             after being adjusted and flipped.
         """
-        structure = self.structure.repeat([int(self.ah * 0.75), int(self.ah * 0.75), int(self.h * 0.5)])
-        positions = structure.positions
-        if self.ah == self.a:
+
+        if self.alpha is None:
+            structure = self.structure.repeat([int(self.ah * 0.75), int(self.ah * 0.75), int(self.h * 0.5)])
+            positions = structure.positions
             hr = self.ah
             u = np.linspace(0, 2 * np.pi, 70)
             v = np.linspace(hr, self.h, 70)
@@ -66,33 +125,44 @@ class TipGenerator:
             y = (self.a) * np.sin(uu)
             y -= np.min(y)
             z = vv
+            phi = np.linspace(0, 1 * np.pi, 70)
+            uu, pp = np.meshgrid(u, phi)
+            xh = self.ah * np.sin(pp) * np.cos(uu)
+            xh -= np.min(xh)
+            yh = self.ah * np.sin(pp) * np.sin(uu)
+            yh -= np.min(yh)
+            zh = self.ah * np.cos(pp)
+            xh = xh[zh < 0]
+            yh = yh[zh < 0]
+            zh = zh[zh < 0]
+            zh += hr
+            tip_pos_cod = np.vstack([np.hstack([x.ravel(), xh.ravel()]), np.hstack([y.ravel(), yh.ravel()]),
+                                    np.hstack([z.ravel(), zh.ravel()])]).T
+            hull = ConvexHull(tip_pos_cod)
+            tip_ind = self.isInHull(positions, hull)
+            lies_in_tip = positions[tip_ind]
+            lies_in_tip = np.matmul(lies_in_tip, [[1, 0, 0], [0, 1, 0], [0, 0, -1]])
+            lies_in_tip[:, 2] -= np.min(lies_in_tip[:, 2])
         else:
-            hr = self.h * self.ah / (self.a)
-            u = np.linspace(0, 2 * np.pi, 70)
-            v = np.linspace(hr, self.h, 70)
-            uu, vv = np.meshgrid(u, v)
-            x = (self.a) * vv * np.cos(uu) / self.h
-            y = (self.a) * vv * np.sin(uu) / self.h
-            z = vv
-        phi = np.linspace(0, 1 * np.pi, 70)
-        uu, pp = np.meshgrid(u, phi)
-        xh = self.ah * np.sin(pp) * np.cos(uu)
-        xh -= np.min(xh)
-        yh = self.ah * np.sin(pp) * np.sin(uu)
-        yh -= np.min(yh)
-        zh = self.ah * np.cos(pp)
-        xh = xh[zh < 0]
-        yh = yh[zh < 0]
-        zh = zh[zh < 0]
-        zh += hr
-        tip_pos_cod = np.vstack([np.hstack([x.ravel(), xh.ravel()]), np.hstack([y.ravel(), yh.ravel()]),
-                                 np.hstack([z.ravel(), zh.ravel()])]).T
-        hull = ConvexHull(tip_pos_cod)
-        tip_ind = self.isInHull(positions, hull)
-        lies_in_tip = positions[tip_ind]
-        lies_in_tip = np.matmul(lies_in_tip, [[1, 0, 0], [0, 1, 0], [0, 0, -1]])
-        lies_in_tip[:, 2] -= np.min(lies_in_tip[:, 2])
-        return lies_in_tip
+            x,y,z,R1 = TipGenerator.create_shank_tip(radius_spherical_cap=self.ah,shank_angle_degrees=self.alpha,total_height=self.h,num_points=70)
+            structure = self.structure.repeat([int(R1 * 0.75), int(R1 * 0.75), int(self.h * 0.5)])
+            positions = structure.positions
+            tip_pos_cod = np.vstack([x,y,z]).T
+            hull = ConvexHull(tip_pos_cod)
+            tip_ind = self.isInHull(positions, hull)
+            lies_in_tip = positions[tip_ind]
+            lies_in_tip = np.matmul(lies_in_tip, [[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+            lies_in_tip[:, 2] -= np.min(lies_in_tip[:, 2])
+        elements = structure.get_species_symbols()[structure.get_chemical_indices()][tip_ind]
+        return lies_in_tip,elements
+    
+    def create_tip_pyiron(self,pr):
+        lies_in_tip,elements = self.create_tip()
+        struc_tip = pr.create.structure.atoms(elements=elements,positions=lies_in_tip)
+        cell = [[np.max(struc_tip.positions[:,0])+15,np.min(struc_tip.positions[:,1])-15,0],[np.min(struc_tip.positions[:,0])-15,np.max(struc_tip.positions[:,1])+15,0],[0,0,np.max(struc_tip.positions[:,2])+40]]
+        struc_tip.cell = cell
+        return struc_tip
+
 
 def visualize(structure=None,charge=None):
     if charge is None:
