@@ -36,7 +36,7 @@ $$f_{n+1}(P) =  \frac{1}{2\pi} \iint_{S^\prime}\frac{\vec{n_{P}}\cdot\vec{u}}{|\
 
 with $f_{o}$ as any function defined on a convex surface, Robin showed that this would converge to equation (1).
 
-We consider surface as a series of fractional point charges ${q_{i}}_{i=1,2,\ldots,N}$ placed on each surface atom over a small surface $s_{at}$ .
+We consider surface as a series of fractional point charges ${q_{i}}_{i=1,2,...,N}$ placed on each surface atom over a small surface $s_{at}$ .
 
 The electrostatic equilibrium of the conductor can then be described by a local Robin equation as given in equation (1):
 
