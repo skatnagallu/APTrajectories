@@ -1,5 +1,4 @@
 import numpy as np
-import datautils
 
 
 def nunique(arr):

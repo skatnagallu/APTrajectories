@@ -164,13 +164,16 @@ class TipGenerator:
         return struc_tip
 
 
-def visualize(structure=None,charge=None):
+def visualize(structure=None,charge=None,surf_indices=None):
     if charge is None:
         charge = structure.indices
+    if surf_indices is None:
+        surf_indices = np.arange(len(structure))
+    
     fig = go.Figure(data=[go.Scatter3d(
-            x=structure.positions[:,0],
-            y=structure.positions[:,1],
-            z=structure.positions[:,2],
+            x=structure.positions[surf_indices,0],
+            y=structure.positions[surf_indices,1],
+            z=structure.positions[surf_indices,2],
             mode='markers',
             marker=dict(
                 size=9,
