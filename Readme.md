@@ -4,7 +4,7 @@ $Robin-Rolland^{[1]}$ type simulations for APT trajectories.
 
 Consider a perfect conductor isolated in space brought to  electric potential $V_{a}$, as shown above.
 
-$V_{p}$ be the electrostatic potential at point P on the surface. Coloumb's law makes it possible to write this potential from the disttribution of charges in space 
+$V_{p}$ be the electrostatic potential at point P on the surface. Coloumb's law makes it possible to write this potential from the distribution of charges in space 
 (on the surface in this case):
 
 $$V_{p} = \frac{1}{4\pi\varepsilon_{o}}\iint_{S^\prime}\frac{\sigma(P^\prime)}{|\vec{u}|}\,dS^\prime$$
