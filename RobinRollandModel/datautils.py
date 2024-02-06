@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.spatial import ConvexHull
 import plotly.graph_objects as go
+import h5py
 
 class TipGenerator:
     def __init__(self, structure, h=80, ah=20, alpha=None, zheight=50):
@@ -232,3 +233,30 @@ def visualize_evaporation(tip_pos, tip_pos_charge, tip_surf_ind_pos):
                       margin=dict(l=0, r=0, b=0, t=40))
 
     fig.show()
+
+def collect_output(path=None):
+    fin_evapos = {}
+    with h5py.File(f'{path}/fin_evapos.h5','r') as output:
+        for varname in output.keys ():
+            atom = float(str(varname).replace('step=',''))
+            fin_evapos[atom] = np.asarray(output[varname])
+    
+    tip_pos = {}
+    with h5py.File(f'{path}/tip_pos.h5','r') as output:
+        for varname in output.keys ():
+            atom = float(str(varname).replace('step=',''))
+            tip_pos[atom] = np.asarray(output[varname])
+    
+    tip_pos_charge = {}
+    with h5py.File(f'{path}/tip_pos_charge.h5','r') as output:
+        for varname in output.keys ():
+            atom = float(str(varname).replace('step=',''))
+            tip_pos_charge[atom] = np.asarray(output[varname])
+    
+    tip_surf_ind = {}
+    with h5py.File(f'{path}/tip_surf_ind.h5','r') as output:
+        for varname in output.keys ():
+            atom = float(str(varname).replace('step=',''))
+            tip_surf_ind[atom] = np.asarray(output[varname])
+
+    return fin_evapos, tip_pos, tip_pos_charge, tip_surf_ind
