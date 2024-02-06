@@ -2,13 +2,12 @@ from pyiron_base.utils.error import ImportAlarm
 from pyiron_base.jobs.job.template import TemplateJob
 import h5py
 import numpy as np
-
+from pyiron_base.jobs.job.jobtype import JobType
 try:
     from RobinRollandModel.main import RRModel
     from RobinRollandModel.datautils import TipGenerator
 except ImportError:
     import_alarm = ImportAlarm("Unable to import RobinRollandmodel")
-
 
 class RRModelAPTjob(TemplateJob):
     def __init__(self, project, job_name):
@@ -20,15 +19,16 @@ class RRModelAPTjob(TemplateJob):
         self.input['tip_shank_angle'] = None
         self.input['basic_structure'] = None
         self.input['num_atoms'] = 5 #number of atoms to evaporate
-        self.input['tip_structure'] = TipGenerator(structure=self.input.basic_structure,
+        self.input['tip_generator'] = TipGenerator(structure=self.input.basic_structure,
                                                    h=self.input.tip_height,
                                                    ah=self.input.tip_radius,
                                                    alpha=self.input.tip_shank_angle,
                                                    zheight=self.input.z_height)
+        self.input['structure'] = self.input.tip_generator.create_tip_pyiron(self.project) # structure of the tip
 
     def run_static(self,**kwargs):
         job = RRModel(tip_generator=self.input.tip_structure,
-                      structure=self.input.basic_structure,
+                      structure=self.input.structure,
                       e_field=self.input.e_field)
         job.run_evaporation(num_atoms=self.input.num_atoms,**kwargs)
         self.collect_output()
@@ -64,4 +64,4 @@ class RRModelAPTjob(TemplateJob):
                 tip_surf_ind[atom] = np.asarray(output[varname])
         self.output['surface_indices'] = tip_surf_ind
 
-            
+JobType.register(RRModelAPTjob)

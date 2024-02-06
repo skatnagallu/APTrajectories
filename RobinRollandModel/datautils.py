@@ -44,7 +44,7 @@ class TipGenerator:
         """
         A = hull.equations[:, 0:-1]
         b = np.transpose(np.array([hull.equations[:, -1]]))
-        is_in_hull = np.all((A @ np.transpose(P)) <= np.tile(-b, (1, len(P))), axis=0)
+        is_in_hull = np.all((A @ P.T) + b <= 0, axis=0)
         return is_in_hull
     
     @staticmethod
