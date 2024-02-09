@@ -1,0 +1,301 @@
+Thu Feb  8 10:24:30 2024    my_apt_imp.pyprofile
+
+         352755 function calls (352749 primitive calls) in 0.224 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.122    0.122    0.124    0.124 /Users/shyamkatnagallu/Projects/APTrajectories/RobinRollandModel/datautils.py:31(isInHull)
+        1    0.014    0.014    0.015    0.015 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:1165(__imul__)
+    11193    0.013    0.000    0.042    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/periodic_table.py:84(__getitem__)
+        1    0.012    0.012    0.152    0.152 /Users/shyamkatnagallu/Projects/APTrajectories/RobinRollandModel/datautils.py:106(create_tip)
+    11193    0.007    0.000    0.026    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/series.py:1085(__getitem__)
+    11191    0.004    0.000    0.049    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:290(<dictcomp>)
+    11193    0.004    0.000    0.011    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/series.py:1210(_get_value)
+    11197    0.004    0.000    0.006    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexing.py:2758(check_dict_or_set_indexers)
+    11194    0.003    0.000    0.004    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexes/base.py:3774(get_loc)
+    11191    0.003    0.000    0.053    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:288(_store_elements)
+    11198    0.003    0.000    0.003    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexes/base.py:5319(__contains__)
+     5596    0.003    0.000    0.056    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:706(convert_element)
+    67242    0.003    0.000    0.003    0.000 {built-in method builtins.isinstance}
+    16788    0.003    0.000    0.003    0.000 {built-in method builtins.repr}
+    16788    0.002    0.000    0.006    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/periodic_table.py:131(__hash__)
+       18    0.002    0.000    0.002    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+    11193    0.002    0.000    0.044    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/periodic_table.py:79(__getattr__)
+    11193    0.002    0.000    0.003    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/series.py:826(_values)
+     5596    0.002    0.000    0.005    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:292(_species_to_index_dict)
+    27989    0.002    0.000    0.002    0.000 {built-in method builtins.hash}
+        1    0.002    0.002    0.002    0.002 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:135(<listcomp>)
+        1    0.002    0.002    0.057    0.057 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:170(<listcomp>)
+        2    0.001    0.001    0.002    0.001 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/symbols.py:16(symbols2numbers)
+    11197    0.001    0.000    0.002    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/common.py:370(apply_if_callable)
+        1    0.001    0.001    0.008    0.008 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:174(<listcomp>)
+    11193    0.001    0.000    0.001    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/managers.py:2003(internal_values)
+    16792    0.001    0.000    0.001    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:269(species)
+     5596    0.001    0.000    0.003    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:294(<dictcomp>)
+     5099    0.001    0.000    0.001    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/cell.py:222(__array__)
+    16791    0.001    0.000    0.001    0.000 {method 'keys' of 'dict' objects}
+    11194    0.001    0.000    0.001    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexes/base.py:6671(_maybe_cast_indexer)
+       36    0.001    0.000    0.001    0.000 {built-in method numpy.array}
+        2    0.000    0.000    0.002    0.001 {built-in method fromkeys}
+    11197    0.000    0.000    0.000    0.000 {built-in method builtins.callable}
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:189(<listcomp>)
+     2551    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:1947(cell)
+     2541    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/multiarray.py:741(dot)
+     5607    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method io.open}
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/periodic_table.py:212(__init__)
+        3    0.000    0.000    0.002    0.001 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:131(__init__)
+        2    0.000    0.000    0.073    0.036 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:79(__init__)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/function_base.py:24(linspace)
+       13    0.000    0.000    0.000    0.000 {method 'copy' of 'numpy.ndarray' objects}
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/stride_tricks.py:340(_broadcast_to)
+        1    0.000    0.000    0.224    0.224 /Users/shyamkatnagallu/Projects/APTrajectories/RobinRollandModel/datautils.py:166(create_tip_pyiron)
+       12    0.000    0.000    0.002    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:71(_wrapreduction)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.dir}
+        8    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:450(new_array)
+       21    0.000    0.000    0.000    0.000 {built-in method numpy.asarray}
+       11    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:905(copy)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/shape_base.py:292(hstack)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/frame.py:4050(__getitem__)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:2063(__copy__)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:1193(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/managers.py:959(fast_xs)
+        8    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/cell.py:61(new)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/shape_base.py:1185(tile)
+        3    0.000    0.000    0.000    0.000 {method 'repeat' of 'numpy.ndarray' objects}
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:333(set_cell)
+        9    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/copy.py:66(copy)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:292(__init__)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/shape_base.py:219(vstack)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/function_base.py:5010(meshgrid)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:4153(xs)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/periodic_table.py:291(element)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/periodic_table.py:75(<listcomp>)
+    50/44    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/stride_tricks.py:480(broadcast_arrays)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/cProfile.py:45(dump_stats)
+      151    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+        1    0.000    0.000    0.072    0.072 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/factory.py:297(atoms)
+        1    0.000    0.000    0.000    0.000 {built-in method _warnings.warn}
+       12    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:72(<dictcomp>)
+       10    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/cell.py:23(__init__)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/stride_tricks.py:416(_broadcast_shape)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:1952(cell)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/cast.py:1433(find_common_type)
+        7    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:2836(min)
+       19    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+       17    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+       11    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/utils/arraywrapper.py:66(attr)
+       13    0.000    0.000    0.000    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.015    0.015 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:1197(repeat)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexing.py:1398(_getitem_axis)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:6230(__finalize__)
+       13    0.000    0.000    0.000    0.000 {built-in method numpy.zeros}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atom.py:43(__init__)
+       19    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:490(set_array)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:1734(isEnabledFor)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/stride_tricks.py:546(<listcomp>)
+        1    0.000    0.000    0.000    0.000 {method '__reduce_ex__' of 'object' objects}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:1610(_log)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:2134(__getattr__)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexing.py:1177(__getitem__)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/function_base.py:5150(<listcomp>)
+        3    0.000    0.000    0.000    0.000 {built-in method numpy.arange}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:1467(debug)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:438(pbc)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:1595(makeRecord)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/periodic_table.py:37(__init__)
+        6    0.000    0.000    0.000    0.000 {built-in method builtins.any}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/copy.py:128(deepcopy)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/cell.py:195(copy)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexes/base.py:5084(values)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:1690(callHandlers)
+        1    0.000    0.000    0.002    0.002 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:2421(all)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/frame.py:4614(_get_item_cache)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexing.py:1380(_get_label)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/blocks.py:2820(external_values)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/cast.py:1392(np_find_common_type)
+       18    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/blocks.py:1253(iget)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:862(get_species_symbols)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/shape_base.py:23(atleast_1d)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:2979(prod)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:53(_wrapfunc)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:399(get_cell)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/blocks.py:2709(new_block)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:2344(set_constraint)
+       10    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/_config/__init__.py:34(using_copy_on_write)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:565(set_tags)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:1636(handle)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/managers.py:1999(external_values)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/frame.py:672(_constructor_sliced_from_mgr)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/blocks.py:249(external_values)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:278(__init__)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:2468(set_initial_magnetic_moments)
+       36    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/copyreg.py:113(_slotnames)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:1561(findCaller)
+        5    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:309(set_constraint)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:585(_get_axis)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:2692(max)
+       19    0.000    0.000    0.000    0.000 {built-in method numpy.asanyarray}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/copy.py:259(_reconstruct)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/common.py:137(is_object_dtype)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:186(<listcomp>)
+        1    0.000    0.000    0.000    0.000 <frozen posixpath>:117(splitext)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/shape_base.py:81(atleast_2d)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:194(_is_internal_frame)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/_methods.py:55(_any)
+        7    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/shape_base.py:1267(<genexpr>)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/base.py:378(interleaved_dtype)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/series.py:784(values)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:870(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:441(copy)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/periodic_table.py:73(_init_mendeleev)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:6295(__setattr__)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:6278(__getattr__)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/function_base.py:348(iterable)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atom.py:84(__init__)
+       16    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/shape_base.py:215(_vhstack_dispatcher)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:3832(product)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:277(set_species)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:588(transpose)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:3823(_product_dispatcher)
+        3    0.000    0.000    0.000    0.000 {method 'any' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.000    0.000 <frozen posixpath>:140(basename)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:390(set_celldisp)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/copyreg.py:104(__newobj__)
+        9    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:1926(_get_positions)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:442(set_pbc)
+       12    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/stride_tricks.py:345(<genexpr>)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:259(spins)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atoms.py:758(get_chemical_indices)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/cell.py:52(ascell)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:600(set_masses)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:339(_from_mgr)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/managers.py:985(<listcomp>)
+        6    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/shape_base.py:1257(<genexpr>)
+        3    0.000    0.000    0.000    0.000 <frozen posixpath>:52(normcase)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexers/utils.py:62(is_list_like_indexer)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:292(calc)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:228(_acquireLock)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexes/base.py:5369(__getitem__)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/function_base.py:5163(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:123(getLevelName)
+       15    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:1996(default)
+        6    0.000    0.000    0.000    0.000 {method 'ravel' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.000    0.000 /Users/shyamkatnagallu/Projects/APTrajectories/RobinRollandModel/datautils.py:7(__init__)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/numeric.py:1855(isscalar)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:579(set_momenta)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/inference.py:334(is_hashable)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/base.py:74(__len__)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/copy.py:243(_keep_alive)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/cProfile.py:51(create_stats)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/shape_base.py:207(_arrays_for_stack_dispatcher)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:3176(ndim)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/stride_tricks.py:542(<genexpr>)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/analyse.py:42(__init__)
+        9    0.000    0.000    0.000    0.000 {method 'values' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/stride_tricks.py:538(<listcomp>)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/stride_tricks.py:25(_maybe_view_as_subclass)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/cast.py:1472(<genexpr>)
+        1    0.000    0.000    0.000    0.000 <frozen genericpath>:121(_splitext)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/frame.py:669(_sliced_from_mgr)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:4373(_set_is_copy)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/generic.py:42(_instancecheck)
+        1    0.000    0.000    0.000    0.000 {method 'transpose' of 'numpy.ndarray' objects}
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/generic.py:37(_check)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:571(_get_axis_number)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/cast.py:1463(<genexpr>)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/flags.py:51(__init__)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexes/base.py:5433(_can_hold_identifiers_and_holds_name)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:660(set_initial_charges)
+        1    0.000    0.000    0.000    0.000 {method 'copy' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/construction.py:481(ensure_wrapped_if_datetimelike)
+        3    0.000    0.000    0.000    0.000 {method 'astype' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/managers.py:481(is_view)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/threading.py:1453(current_thread)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/_methods.py:43(_amin)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/threading.py:1152(name)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_base/project/generic.py:197(create)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:164(<lambda>)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/_config/__init__.py:42(warn_copy_on_write)
+        2    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x102e01600}
+        1    0.000    0.000    0.000    0.000 <frozen posixpath>:41(_get_sep)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/common.py:1419(_is_dtype_type)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/ma/core.py:6485(isMaskedArray)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/common.py:97(is_bool_indexer)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexing.py:305(loc)
+        3    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/copy.py:201(_deepcopy_list)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:237(_releaseLock)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexing.py:1227(_validate_key)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:4579(_is_view)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:1938(_get_atomic_numbers)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/blocks.py:266(mgr_locs)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/multiarray.py:153(concatenate)
+        1    0.000    0.000    0.000    0.000 {built-in method numpy.empty}
+        6    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/copy.py:107(_copy_immutable)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/blocks.py:2667(get_block_type)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/managers.py:1836(__init__)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/multiprocessing/process.py:189(name)
+        1    0.000    0.000    0.000    0.000 /Users/shyamkatnagallu/Projects/APTrajectories/RobinRollandModel/main.py:10(__init__)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/cast.py:1479(<genexpr>)
+        3    0.000    0.000    0.000    0.000 {built-in method _operator.index}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/common.py:152(cast_scalar_indexer)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/flags.py:87(allows_duplicate_labels)
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.iter}
+        7    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:2831(_min_dispatcher)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:815(filter)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:2416(_all_dispatcher)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:695(ndim)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:958(__len__)
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.id}
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:3172(_ndim_dispatcher)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/blocks.py:2570(is_view)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:324(_get_constraints)
+        4    0.000    0.000    0.000    0.000 {method '__exit__' of 'numpy.nditer' objects}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:628(set_initial_magnetic_moments)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/shape_base.py:1181(_tile_dispatcher)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_base/state/__init__.py:49(logger)
+        4    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/multiarray.py:669(result_type)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexes/base.py:909(__len__)
+        1    0.000    0.000    0.000    0.000 {method 'acquire' of '_thread.RLock' objects}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:1720(getEffectiveLevel)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/_methods.py:39(_amax)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:404(flags)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/cast.py:1474(<genexpr>)
+        1    0.000    0.000    0.000    0.000 {method 'update' of 'dict' objects}
+        5    0.000    0.000    0.000    0.000 {built-in method posix.fspath}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/common.py:121(classes)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:433(pbc)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.issubclass}
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/function_base.py:19(_linspace_dispatcher)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:666(_info_axis)
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/internals/managers.py:247(items)
+        1    0.000    0.000    0.000    0.000 {built-in method time.time}
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:2687(_max_dispatcher)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/project.py:770(structure)
+        3    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/shape_base.py:19(_atleast_1d_dispatcher)
+        1    0.000    0.000    0.000    0.000 {method 'get' of 'mappingproxy' objects}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/generic.py:362(attrs)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/series.py:909(__len__)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/multiprocessing/process.py:37(current_process)
+        1    0.000    0.000    0.000    0.000 {built-in method sys._getframe}
+        1    0.000    0.000    0.000    0.000 {method 'release' of '_thread.RLock' objects}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/indexing.py:1166(_check_deprecated_callable_usage)
+        1    0.000    0.000    0.000    0.000 {method 'copy' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/logging/__init__.py:1319(disable)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        2    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/lib/function_base.py:5005(_meshgrid_dispatcher)
+        2    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/numpy/core/fromnumeric.py:2974(_prod_dispatcher)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/dtypes/common.py:123(<lambda>)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pandas/core/flags.py:55(allows_duplicate_labels)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/ase/atoms.py:1191(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /opt/homebrew/anaconda3/envs/pyiron/lib/python3.11/site-packages/pyiron_atomistics/atomistics/structure/atom.py:110(__getattr__)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.getpid}
+        1    0.000 

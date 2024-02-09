@@ -19,6 +19,8 @@ class RRModelAPTjob(TemplateJob):
         self.input['tip_shank_angle'] = None
         self.input['basic_structure'] = None
         self.input['num_atoms'] = 5 #number of atoms to evaporate
+
+    def create_input_structure(self):
         self.input['tip_generator'] = TipGenerator(structure=self.input.basic_structure,
                                                    h=self.input.tip_height,
                                                    ah=self.input.tip_radius,
@@ -27,14 +29,15 @@ class RRModelAPTjob(TemplateJob):
         self.input['structure'] = self.input.tip_generator.create_tip_pyiron(self.project) # structure of the tip
 
     def run_static(self,**kwargs):
-        job = RRModel(tip_generator=self.input.tip_structure,
+        job = RRModel(tip_generator=self.input.tip_generator,
                       structure=self.input.structure,
                       e_field=self.input.e_field)
         job.run_evaporation(num_atoms=self.input.num_atoms,**kwargs)
-        self.collect_output()
+        #self.collect_output()
 
-    def collect_output(self):
-        path = self.working_directory
+    def collect_output(self, path=None):
+        if path is None:
+            path = self.working_directory
         
         fin_evapos = {}
         with h5py.File(f'{path}/fin_evapos.h5','r') as output:

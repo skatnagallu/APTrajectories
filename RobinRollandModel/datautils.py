@@ -115,7 +115,10 @@ class TipGenerator:
         """
 
         if self.alpha is None:
-            structure = self.structure.repeat([int(self.ah * 0.75), int(self.ah * 0.75), int(self.h * 0.5)])
+            # structure = self.structure.repeat([int(self.ah * 0.75), int(self.ah * 0.75), int(self.h * 0.5)])
+            lp = self.structure.get_cell()[0][0]/2
+            lpz = self.structure.get_cell()[2][2]
+            structure = self.structure.repeat([int(np.ceil((self.ah+1)/lp)),int(np.ceil((self.ah+1)/lp)),int(np.ceil((self.h+1)/lpz))])
             positions = structure.positions
             hr = self.ah
             u = np.linspace(0, 2 * np.pi, 70)
@@ -146,7 +149,10 @@ class TipGenerator:
             lies_in_tip[:, 2] -= np.min(lies_in_tip[:, 2])
         else:
             x,y,z,R1 = TipGenerator.create_shank_tip(radius_spherical_cap=self.ah,shank_angle_degrees=self.alpha,total_height=self.h,num_points=70)
-            structure = self.structure.repeat([int(R1 * 0.75), int(R1 * 0.75), int(self.h * 0.5)])
+            # structure = self.structure.repeat([int(R1 * 0.75), int(R1 * 0.75), int(self.h * 0.5)])
+            lp = self.structure.get_cell()[0][0]/2
+            lpz = self.structure.get_cell()[2][2]
+            structure = self.structure.repeat([int(np.ceil((self.ah+1)/lp)),int(np.ceil((self.ah+1)/lp)),int(np.ceil((self.h+1)/lpz))])
             positions = structure.positions
             tip_pos_cod = np.vstack([x,y,z]).T
             hull = ConvexHull(tip_pos_cod)
@@ -167,14 +173,22 @@ class TipGenerator:
 
 def visualize(structure=None,charge=None,surf_indices=None):
     if charge is None:
-        charge = structure.indices
+        try:
+            charge = structure.indices
+        except AttributeError:
+            charge = np.zeros(len(structure))
     if surf_indices is None:
         surf_indices = np.arange(len(structure))
     
+    try:
+        positions = structure.get_positions()
+    except AttributeError:
+        positions = structure
+    
     fig = go.Figure(data=[go.Scatter3d(
-            x=structure.positions[surf_indices,0],
-            y=structure.positions[surf_indices,1],
-            z=structure.positions[surf_indices,2],
+            x=positions[surf_indices,0],
+            y=positions[surf_indices,1],
+            z=positions[surf_indices,2],
             mode='markers',
             marker=dict(
                 size=9,

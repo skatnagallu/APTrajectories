@@ -343,7 +343,7 @@ class RRModel:
             tip_output = RRModel.charge_distribution_z(structure=new_structure,
                                                     e_field=self.e_field,radius=r,
                                                     steps=steps,epsilon=epsilon,zheight=zheight)
-            tip_pos[i] = new_structure
+            tip_pos[i] = new_structure.get_positions()
             tip_pos_charge[i] = tip_output['final_charge']
             tip_surf_ind_pos[i] = tip_output['surface_indices']
 
