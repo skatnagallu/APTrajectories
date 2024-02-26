@@ -21,19 +21,25 @@ class RRModelAPTjob(TemplateJob):
         self.input['num_atoms'] = 5 #number of atoms to evaporate
 
     def create_input_structure(self):
-        self.input['tip_generator'] = TipGenerator(structure=self.input.basic_structure,
+        tip_generator = TipGenerator(structure=self.input.basic_structure,
                                                    h=self.input.tip_height,
                                                    ah=self.input.tip_radius,
                                                    alpha=self.input.tip_shank_angle,
                                                    zheight=self.input.z_height)
-        self.input['structure'] = self.input.tip_generator.create_tip_pyiron(self.project) # structure of the tip
+        self.input['structure'] = tip_generator.create_tip_pyiron(self.project) # structure of the tip
+        return tip_generator
 
     def run_static(self,**kwargs):
-        job = RRModel(tip_generator=self.input.tip_generator,
+        tip_generator = self.create_input_structure()
+        #self.input['structure']= tip_generator.create_tip_pyiron(self.project)
+        job = RRModel(tip_generator=tip_generator,
                       structure=self.input.structure,
                       e_field=self.input.e_field)
-        job.run_evaporation(num_atoms=self.input.num_atoms,**kwargs)
-        #self.collect_output()
+        job.run_evaporation(num_atoms=self.input.num_atoms,path=self.working_directory,**kwargs)
+        self.collect_output()
+        
+        self.status.finished = True
+
 
     def collect_output(self, path=None):
         if path is None:
@@ -66,5 +72,6 @@ class RRModelAPTjob(TemplateJob):
                 atom = float(str(varname).replace('step=',''))
                 tip_surf_ind[atom] = np.asarray(output[varname])
         self.output['surface_indices'] = tip_surf_ind
+        #self.to_hdf() #is a duplication of output to job hdf5 file
 
 JobType.register(RRModelAPTjob)

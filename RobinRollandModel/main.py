@@ -1,5 +1,6 @@
 import numpy as np
 import h5py
+import os
 
 class RRModel:
     """
@@ -298,7 +299,7 @@ class RRModel:
         c_f[surf_indices] = np.stack(force)
         return c_f
 
-    def run_evaporation(self, num_atoms=10, **kwargs):
+    def run_evaporation(self, num_atoms=10, path = None, **kwargs):
         """
         Runs the evaporation process simulation for a specified number of atoms.
 
@@ -316,6 +317,8 @@ class RRModel:
             Contains the updated structure positions, the final charge distributions, 
             and surface indices post-evaporation.
         """
+        if path is None:
+            path = os.getcwd()
         steps = kwargs.get('steps', 1000)
         epsilon = kwargs.get('epsilon', 1e-9)
         time_step = kwargs.get('dt',1.5)
@@ -346,21 +349,19 @@ class RRModel:
             tip_pos[i] = new_structure.get_positions()
             tip_pos_charge[i] = tip_output['final_charge']
             tip_surf_ind_pos[i] = tip_output['surface_indices']
-
-        with h5py.File('fin_evapos.h5','w') as handle:
+        with h5py.File(f'{path}/fin_evapos.h5','w') as handle:
             for i in fin_evapos.keys():
                 handle.create_dataset('step={}'.format(i), data= fin_evapos[i])
                 
-        with h5py.File('tip_pos.h5','w') as handle:
+        with h5py.File(f'{path}/tip_pos.h5','w') as handle:
             for i in tip_pos.keys():
                 handle.create_dataset('step={}'.format(i), data= tip_pos[i])
                 
-        with h5py.File('tip_pos_charge.h5','w') as handle:
+        with h5py.File(f'{path}/tip_pos_charge.h5','w') as handle:
             for i in tip_pos_charge.keys():
                 handle.create_dataset('step={}'.format(i), data= tip_pos_charge[i])
         
-        with h5py.File('tip_surf_ind.h5','w') as handle:
+        with h5py.File(f'{path}/tip_surf_ind.h5','w') as handle:
             for i in tip_surf_ind_pos.keys():
                 handle.create_dataset('step={}'.format(i), data= tip_surf_ind_pos[i])
                     
-        
