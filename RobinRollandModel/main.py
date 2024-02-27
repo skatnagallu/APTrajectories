@@ -1,6 +1,7 @@
 import numpy as np
 import h5py
 import os
+from tqdm import trange, tqdm
 
 class RRModel:
     """
@@ -143,6 +144,7 @@ class RRModel:
         initial_charge[zheight_ind]=0
         initial_charge = (initial_charge/np.sum(initial_charge))*total_charge
         initial_charge_2 = initial_charge
+        pbar = tqdm(total=steps)
         for n in range(steps):
             new_charge = []
             for i in range(len(surf_indices)):
@@ -156,6 +158,7 @@ class RRModel:
                     pos_vectors_norm[i]=0
                     charge_sat = 1/(2*np.pi) * np.sum(initial_charge_2*dotprod*pos_vectors_norm)
                     new_charge.append(charge_sat)
+            pbar.update(1)
             sat = np.sum(initial_charge)/np.sum(new_charge)
             new_charge = np.array(new_charge)
             new_charge = new_charge*sat 
@@ -164,6 +167,7 @@ class RRModel:
                 break
             else:
                 print("convergence not reached")
+        pbar.close()
         maxwell_stress = new_charge**2/(2*sat**2)
         output = dict()
         output['initial_charge']=initial_charge
@@ -200,7 +204,7 @@ class RRModel:
             The evaporation trajectory of the atom.
         """
         evap_trajectory = [structure.positions[surf_indices[evap_ind]]]
-        for i in range(num_steps):
+        for i in trange(num_steps):
             if i == 0:
                 pos_t = structure.positions[surf_indices[evap_ind]]
                 pos_vectors = pos_t - structure[surf_indices].positions
@@ -222,7 +226,7 @@ class RRModel:
         return np.array(evap_trajectory)
 
     @staticmethod
-    def detecttor_image(evaporation_trajectory, det_z=1e9):
+    def detector_image(evaporation_trajectory, det_z=1e9):
         """
         Projects the evaporation trajectory onto a detector plane.
 
@@ -334,6 +338,7 @@ class RRModel:
         tip_pos_charge={}
         tip_surf_ind_pos= {}
         structure = self.structure
+        pbar = tqdm(total=num_atoms)
         for i in range(num_atoms):
             evap_ind = np.argmax(tip_output['maxwell_stress'])
             fin_evapos[i] = RRModel.evaporation_trajectory(structure=self.structure,
@@ -349,6 +354,8 @@ class RRModel:
             tip_pos[i] = new_structure.get_positions()
             tip_pos_charge[i] = tip_output['final_charge']
             tip_surf_ind_pos[i] = tip_output['surface_indices']
+            pbar.update(1)
+        pbar.close()
         with h5py.File(f'{path}/fin_evapos.h5','w') as handle:
             for i in fin_evapos.keys():
                 handle.create_dataset('step={}'.format(i), data= fin_evapos[i])
