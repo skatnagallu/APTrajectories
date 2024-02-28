@@ -1,7 +1,7 @@
 import numpy as np
 import h5py
 import os
-from tqdm import trange, tqdm
+from tqdm import trange
 
 class RRModel:
     """
@@ -204,7 +204,7 @@ class RRModel:
             The evaporation trajectory of the atom.
         """
         evap_trajectory = [structure.positions[surf_indices[evap_ind]]]
-        for i in trange(num_steps):
+        for i in range(num_steps):
             if i == 0:
                 pos_t = structure.positions[surf_indices[evap_ind]]
                 pos_vectors = pos_t - structure[surf_indices].positions
@@ -338,8 +338,7 @@ class RRModel:
         tip_pos_charge={}
         tip_surf_ind_pos= {}
         structure = self.structure
-        pbar = tqdm(total=num_atoms)
-        for i in range(num_atoms):
+        for i in trange(num_atoms):
             evap_ind = np.argmax(tip_output['maxwell_stress'])
             fin_evapos[i] = RRModel.evaporation_trajectory(structure=self.structure,
                                                         surf_indices=tip_output['surface_indices'],
@@ -354,8 +353,7 @@ class RRModel:
             tip_pos[i] = new_structure.get_positions()
             tip_pos_charge[i] = tip_output['final_charge']
             tip_surf_ind_pos[i] = tip_output['surface_indices']
-            pbar.update(1)
-        pbar.close()
+
         with h5py.File(f'{path}/fin_evapos.h5','w') as handle:
             for i in fin_evapos.keys():
                 handle.create_dataset('step={}'.format(i), data= fin_evapos[i])
