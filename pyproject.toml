@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aptrajectories"
-version = "0.1.1"
+version = "0.1.2"
 description = "Simulates APT trajectories based on Robin Rolland charge equilibration model"
 authors = ["skatnagallu <s.katnagallu@mpie.de>"]
 license = "\"Apache 2.0\""
