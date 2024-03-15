@@ -15,6 +15,6 @@ jobs:
         run: echo "${HOME}/.poetry/bin" >> $GITHUB_PATH
       - run: poetry config virtualenvs.create true
       - name: Install venv
-        run: poetry install --no-root
+        run: poetry install -vvv --no-root || poetry install -vvv --no-root || poetry install -vvv --no-root...
       - name: Test
         run: poetry run pytest
