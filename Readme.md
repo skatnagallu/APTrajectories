@@ -4,9 +4,12 @@ Install by using
 
 ```pip install aptrajectories```
 
-For usage, see the [example Notebook](example.ipynb) notebook
+# Example
 
-# $Robin-Rolland^{[1]}$ type simulations for APT trajectories.
+For usage, see the [example Notebook](example.ipynb) notebook.
+
+# Theory
+## $Robin-Rolland^{[1]}$ type simulations for APT trajectories.
 
 ![conductor surface](conductor_surface.PNG)
 
