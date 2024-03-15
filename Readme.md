@@ -1,7 +1,8 @@
 # Installation
 
 Install by using
-'''pip install APTrajectories'''
+
+```pip install aptrajectories```
 
 For usage, see the [example Notebook](example.ipynb) notebook
 
