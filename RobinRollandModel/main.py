@@ -205,7 +205,7 @@ class RRModel:
 
     @staticmethod
     def evaporation_trajectory(
-        structure, surf_indices, new_charge, evap_ind=585, num_steps=100, dt=1
+        structure, surf_indices, new_charge, evap_ind, num_steps=100, dt=1
     ):
         """
         Simulates the trajectory of an atom evaporating from the surface.
@@ -264,7 +264,7 @@ class RRModel:
 
     @staticmethod
     def evaporation_trajectory_force_cut(
-        structure, surf_indices, new_charge, evap_ind=585, force_cutoff=1e-4, dt=1
+        structure, surf_indices, new_charge, evap_ind, force_cutoff=1e-4, dt=1
     ):
         """
         Simulates the trajectory of an atom evaporating from the surface.

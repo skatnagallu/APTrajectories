@@ -1,0 +1,7 @@
+Files in this directory are intended to be written and read by pyiron. 
+
+pyiron may transform user input to enhance performance, thus, use these files with care!
+Consult the log and/or the documentation to gain further information.
+
+To disable writing these warning files, specify 
+WRITE_WORK_DIR_WARNINGS=False in the .pyiron configuration file (or set the PYIRONWRITEWORKDIRWARNINGS environment variable accordingly).

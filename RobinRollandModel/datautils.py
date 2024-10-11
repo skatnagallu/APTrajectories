@@ -267,7 +267,7 @@ def visualize_evaporation(
     """
     fig = go.Figure()
     if ind_all:
-        fin_ind = len(tip_pos) - 1
+        fin_ind = str(len(tip_pos) - 1)
         initial_positions = tip_pos[
             fin_ind
         ]  # Adjust this according to how you store positions in `tip_pos`.
@@ -286,6 +286,7 @@ def visualize_evaporation(
 
         # Loop through each evaporation event to visualize the end positions
         for i in range(len(tip_pos)):
+            i = str(i)
             # Adjust this according to your data structure
             fig.add_trace(
                 go.Scatter3d(
