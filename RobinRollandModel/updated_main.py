@@ -7,7 +7,16 @@ import logging
 import numpy as np
 import h5io
 from tqdm import tqdm
-from scipy.constants import physical_constants
+from scipy.constants import (
+    physical_constants,
+    Boltzmann,
+    elementary_charge,
+    epsilon_0,
+    eV,
+    atomic_mass,
+)
+from ase.data import atomic_masses
+from ase.units import _amu, fs, kB
 from .datautils import TipGenerator
 
 # Configure logging
@@ -172,7 +181,7 @@ class RRModel:
         normal = normal / norms[:, np.newaxis]
         return normal
 
-    def charge_distribution_z(self, config=None):
+    def charge_distribution_z(self, structure=None, config=None):
         """
         Simulates charge distribution on the surface of a structure
         under an external electric field.
@@ -190,8 +199,8 @@ class RRModel:
         """
         if config is None:
             config = SimulationConfig()
-
-        structure = self.structure
+        if structure is None:
+            structure = self.structure
 
         # Identify surface atoms
         if config.relaxed:
@@ -206,6 +215,7 @@ class RRModel:
                 nn_vectors=nn.vecs,
                 first_shell_idxs=np.array(num_first_shell_neighbors) - 1,
             )
+            print(len(surf_indices))
         else:
             nn = structure.get_neighbors(num_neighbors=24)
             coord_numbers = np.apply_along_axis(self.nunique, 1, nn.shells)
@@ -297,66 +307,140 @@ class RRModel:
         }
         return output
 
-    def evaporation_trajectory(self, evap_ind, num_steps=100, dt=1):
+    def evaporation_trajectory(
+        self, evap_ind, num_steps=100, dt=1.0, temperature=50.0, config=None
+    ):
         """
-        Simulates the trajectory of an atom evaporating from the surface.
+        Simulates the trajectory of an atom evaporating from the surface, accounting for
+        atom masses, charge redistribution, initial velocities from Boltzmann distribution,
+        and variable time steps, using Angstroms and consistent units.
 
         Parameters
         ----------
         evap_ind : int
             The index of the evaporating atom in the surface indices array.
         num_steps : int, optional
-            The number of simulation steps for the evaporation trajectory.
+            The maximum number of simulation steps for the evaporation trajectory.
         dt : float, optional
-            The time step size for the simulation.
+            The initial time step size for the simulation in femtoseconds.
+        temperature : float, optional
+            Temperature in Kelvin for initializing velocities from the Maxwell-Boltzmann distribution.
+        config : SimulationConfig, optional
 
         Returns
         -------
         numpy.ndarray
             The evaporation trajectory of the atom.
         """
-        positions = self.structure.positions
-        surf_indices = self.surface_indices
-        new_charge = self.charge_distribution
+        if config is None:
+            config = SimulationConfig()
 
-        evap_trajectory = [positions[surf_indices[evap_ind]]]
+        positions = self.structure.positions.copy()
+        surf_indices = self.surface_indices.copy()
 
-        for i in range(num_steps):
-            if i == 0:
-                pos_t = positions[surf_indices[evap_ind]]
-                pos_vectors = pos_t - positions[surf_indices]
-                norms = np.linalg.norm(pos_vectors, axis=1)
-                zero_norms = norms == 0
-                norms[zero_norms] = np.finfo(float).eps
-                pos_vectors_norm = 1 / norms**3
-                pos_vectors_norm[evap_ind] = 0.0
-                coulomb_contributions = (
-                    new_charge[evap_ind] * new_charge * pos_vectors_norm
-                )
-                force = (1 / (4 * np.pi)) * np.sum(
-                    pos_vectors * coulomb_contributions[:, np.newaxis], axis=0
-                )
-                next_pos = evap_trajectory[0] + force * dt * dt
-                evap_trajectory.append(next_pos)
+        evap_atom_index = int(surf_indices[evap_ind])
+        evap_atom_position = positions[evap_atom_index]
+        # evap_atom_symbol = self.structure[evap_atom_index].symbol
+        evap_atom_mass = atomic_masses[
+            self.structure[evap_atom_index].number
+        ]  # Mass in kg
+
+        # Initialize trajectory and velocities
+        evap_trajectory = [evap_atom_position.copy()]
+        velocities = []
+
+        # Initialize velocity from Maxwell-Boltzmann distribution
+        sigma = np.sqrt(
+            kB * temperature * eV / (evap_atom_mass * _amu)
+        )  # Standard deviation of velocity
+        # Convert sigma to Å/fs
+        sigma_velocity = sigma * 1e-5
+        initial_velocity = np.random.normal(0, sigma_velocity, size=3)
+        velocities.append(initial_velocity)
+
+        # Set the charge of the evaporating atom to +1 after first step
+        evap_atom_charge = 1.0  # Charge in Coulombs
+        
+        # Recalculate charge distribution without the evaporating atom
+        # Assuming charge_distribution_z method can accept updated structure and indices
+
+        structure = self.structure.copy()
+        del structure[evap_atom_index]
+        self.structure = structure.copy()
+        output = self.charge_distribution_z(structure=structure.copy(), config=config)
+        remaining_charges = output["final_charge"]
+        print(len(output["final_charge"]))
+        # Remove the evaporating atom from surface indices and charges
+        remaining_surf_indices = output['surface_indices']
+        remaining_positions = positions[remaining_surf_indices]
+
+        # Time-stepping variables
+        max_dt = dt
+        min_dt = dt / 1000
+        acceleration_threshold = 1e-2  # Adjust as needed
+        dt = max_dt
+
+        for _ in range(num_steps):
+            current_position = evap_trajectory[-1]
+            current_velocity = velocities[-1]
+
+            # Calculate forces on evaporating atom due to remaining surface atoms
+            pos_vectors = remaining_positions - current_position
+            distances = np.linalg.norm(pos_vectors, axis=1)
+            zero_distances = distances == 0
+            distances[zero_distances] = np.finfo(float).eps
+            # Coulomb force calculation
+            # Convert constants to units compatible with eV, Å, and elementary charges
+            # Force in eV/Å = (e^2 / (4 * pi * epsilon_0 * Å)) / Å
+            # e^2 / (4 * pi * epsilon_0) in eV·Å units
+            coulomb_constant = (
+                (elementary_charge**2) / (4 * np.pi * epsilon_0) / eV * 1e10
+            )  # eV·Å·e^{-2}
+            print(len(remaining_charges),len(distances))
+            coulomb_force_magnitudes = (
+                coulomb_constant * (evap_atom_charge * remaining_charges) / distances**2
+            )  # eV/Å
+
+            # Force vectors in eV/Å
+            coulomb_forces = (
+                pos_vectors / distances[:, np.newaxis]
+            ) * coulomb_force_magnitudes[:, np.newaxis]
+
+            # Total force in eV/Å
+            total_force = np.sum(coulomb_forces, axis=0)
+            # Acceleration: a = F / m
+            # Convert mass from amu to eV·fs^2/Å^2
+            mass_in_eV_fs2_per_A2 = (
+                evap_atom_mass * 10363.7
+            )  # conversion factor to go from amu to eV·fs^2/Å^2
+            acceleration = total_force / mass_in_eV_fs2_per_A2  # Å/fs^2
+            # Variable time step adjustment
+            acc_magnitude = np.linalg.norm(acceleration)
+            if acc_magnitude > acceleration_threshold:
+                dt = max(min_dt, dt / 2)
             else:
-                pos_t = evap_trajectory[i]
-                pos_vectors = pos_t - positions[surf_indices]
-                norms = np.linalg.norm(pos_vectors, axis=1)
-                zero_norms = norms == 0
-                norms[zero_norms] = np.finfo(float).eps
-                pos_vectors_norm = 1 / norms**3
-                coulomb_contributions = (
-                    new_charge[evap_ind] * new_charge * pos_vectors_norm
-                )
-                force = (1 / (4 * np.pi)) * np.sum(
-                    pos_vectors * coulomb_contributions[:, np.newaxis], axis=0
-                )
-                next_pos = (
-                    (2 * evap_trajectory[i])
-                    - evap_trajectory[i - 1]
-                    + (0.5 * force * dt**2)
-                )
-                evap_trajectory.append(next_pos)
+                dt = min(max_dt, dt * 1.1)
+
+            # Velocity Verlet integration
+            next_velocity = current_velocity + acceleration * dt
+            next_position = (
+                current_position + current_velocity * dt + 0.5 * acceleration * dt**2
+            )
+
+            # Update trajectory and velocities
+            evap_trajectory.append(next_position)
+            velocities.append(next_velocity)
+
+            # Update current position and velocity
+            current_velocity = next_velocity
+            current_position = next_position
+
+            # Optional: Break if the atom is sufficiently far from the surface
+            if (
+                np.linalg.norm(next_position - evap_atom_position) > 100.0
+            ):  # Adjust threshold as needed
+                break
+
         return np.array(evap_trajectory)
 
     @staticmethod

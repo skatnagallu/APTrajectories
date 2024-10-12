@@ -280,7 +280,7 @@ def visualize_evaporation(
                 z=initial_positions[surf_ind, 2],
                 mode="markers",
                 name="Initial Positions",
-                marker=dict(size=2, color=charge),
+                marker=dict(size=9, color=charge),
             )
         )
 
@@ -321,7 +321,7 @@ def visualize_evaporation(
             z=initial_positions[surf_ind, 2],
             mode="markers",
             name="Initial Positions",
-            marker=dict(size=2, color=charge),
+            marker=dict(size=9, color=charge),
         )
     )
 
